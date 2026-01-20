@@ -187,7 +187,9 @@ def generate_list(*args):
     combined_elements = [f"rename {item1} {item2}" for item1, item2 in zip(new_list_right, file_names)]
 
     final_string = "\n".join(combined_elements)
-    final_string=final_string.replace('.png','.JPG')
+    final_string=final_string.replace('.png','.JPG')	#if we used colmap .PNG files, we want to rename them to JPG
+    final_string=final_string.replace('/','\\')			#Fix the slash for DOS/Windows
+
 #    print(f"{final_string}")
     file_save(final_string)		#save the file
     return None    
