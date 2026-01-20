@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
-import cv2
-import numpy as np
+#import cv2
+#import numpy as np
 from PIL import Image, ImageTk
 from tkinter import filedialog
 
@@ -18,7 +18,7 @@ def open_file():
         parent=root, 
         initialdir="/", 
         title='Please select a directory'
-    )
+        )
 # Check if a directory was selected and print the path
     if directory_path:
         file_names = os.listdir(directory_path)
@@ -27,9 +27,6 @@ def open_file():
         file_path_names=file_path_names.replace('\\',"/")        
         full_path=file_path_names.split('\n')
         return full_path
-#    else:
-#        print("No directory selected.")
-#    window.title(f"Directory Listing - {directory_path}")
 
 def file_save(text2save):
     files = [('All Files', '*.*'), 
@@ -43,38 +40,11 @@ def file_save(text2save):
     return None
     
 def load_image_cv2(image_path):
-    """
-    Load a JPG images using OpenCV.
-
-    Args:
-        image_path1 (str): Path to the first image file.
-    """
     if image_path=="":
         img=Image.new("RGB", (720, 960), (255, 255, 255))
     else:
 #try with PIL instead of CV2
         img=Image.open(image_path)
-        
-
-    """
-# Read images
-    img = cv2.imread(image_path)
-
-# Check if images are loaded correctly
-    if img is None:
-        print("Error: Could not read image files. Check paths.")
-        return
-
-#Rearrang the color channel
-    b,g,r = cv2.split(img)
-    img = cv2.merge((r,g,b))
-
-# Convert the Image object into a TkPhoto object
-    img = cv2.resize(img, (960,720), interpolation=cv2.INTER_AREA)
-    image = Image.fromarray(np.array(img))
-# We are now a TKImage 
-
-    """
     
     image = img.resize((960,720),Image.Resampling.LANCZOS)
 
@@ -195,20 +165,27 @@ def generate_list(*args):
     list_offset=index_right - index_left
     list_left = lbox1.get(0, tk.END)
     list_right = lbox2.get(0, tk.END)
-    new_list_left=list_left[index_left:]
-    new_list_right=list_right[index_right:]
-    list_len_left =len(new_list_left)
-    list_len_right=len(new_list_right)
+# while we can just split the two list at the offset, I think we should include all the Eagle images
+    if list_offset > 0 :
+        new_list_left=list_left[0:]
+        new_list_right=list_right[list_offset:]
+    else:
+        new_list_left=list_left[list_offset:]
+        new_list_right=list_right[0:]
+
+#    new_list_left=list_left[index_left:]
+#    new_list_right=list_right[index_right:]
+#    list_len_left =len(new_list_left)
+#    list_len_right=len(new_list_right)
+
 #we need to do some data processing on Eagle file name--ie we only want the file name, not the path
     file_names = []
     for path in new_list_left:
         file_name = os.path.basename(path)
         file_names.append(file_name)
-    
 
     combined_elements = [f"rename {item1} {item2}" for item1, item2 in zip(new_list_right, file_names)]
 
-#    combined_elements = [f"rename {item1} {item2}" for item1, item2 in zip(new_list_right, new_list_left)]
     final_string = "\n".join(combined_elements)
     final_string=final_string.replace('.png','.JPG')
 #    print(f"{final_string}")
@@ -229,11 +206,6 @@ root.grid_columnconfigure(0, weight=0)
 root.grid_rowconfigure(0,weight=0)
 
 # Grid all the widgets
-#lbox.grid(column=0, row=0, rowspan=6, sticky=(N,S,E,W))
-
-# Replace with your image paths
-#image1=load_image_cv2('D:/MyPythonProjects/camera_front/000021.jpg')
-#image2=load_image_cv2('D:/360Video/camera_front/000031.jpg')
 image1=load_image_cv2('')
 image2=load_image_cv2('')
 
@@ -259,16 +231,14 @@ button4.configure(command=load_right_listbox)
 
 lbox1 = tk.Listbox(root,  height=5, width=80,selectmode=tk.SINGLE)
 lbox1.grid(row=1, column=0)
-lbox1.grid(pady=10, padx=10)
+lbox1.grid(pady=5, padx=5)
 lbox1.configure(selectmode=tk.SINGLE)
 
 lbox2 = tk.Listbox(root,  height=5, width=80,selectmode=tk.SINGLE)
 lbox2.grid(row=1, column=1)
-lbox2.grid(pady=10, padx=10)
+lbox2.grid(pady=5, padx=5)
 lbox2.configure(selectmode=tk.SINGLE)
 
-#lbox1.bind('<<ListboxSelect>>', update_image_left)
-#lbox2.bind('<<ListboxSelect>>', update_image_right)
 lbox1.bind("<Double-Button-1>", update_image_left)
 lbox2.bind("<Double-Button-1>", update_image_right)
 
@@ -277,6 +247,10 @@ button5 = tk.Button(root,text="Generate Rename File", borderwidth=5)
 button5.grid(row=2,column=0)
 button5.grid(pady=10, padx=10, sticky='ne')
 button5.configure(command=generate_list)
+
+verLabel= tk.Label(root, text="Version 1.0 (c) 2026 BigCity Software")
+verLabel.grid(row=2,column=0)
+verLabel.grid(pady=5, padx=5, sticky='nw')
 
 
 root.mainloop() # Start the GUI
