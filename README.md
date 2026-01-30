@@ -3,8 +3,8 @@ Allows user to visually synchronize images between an Eagle Lidar scanner and an
 
 ![screenshot of the application](VisiaulImageCompare.png)
 
-How to use:
-[coming soon]
+How to use:  
+[coming soon]  
 
 Select the Eagle Lidar image folder for the LEFT image.  Usually found in [your lidar folder]\shading\Colmap\images\.
 The RIGHT image folder will be the images extracted from your camera--360' or similar.
@@ -13,18 +13,18 @@ Once the two images match, you press the 'Generate Rename File' and the program 
 the files in the 360' camera image folder with the matching name from Eagle lidar folder.
 
 
-Work flow:
-[coming soon]
+Work flow:  
+[coming soon]  
 
 For DJI/Insta360 camera, export the video files as a panoramic MP4 video file.  I then use ffmpeg to extract the images from
 the mp4 file.  You do need to use the same "frame rate" as the Eagle camera. I use this batch script to do the extraction:
-\n
-set name=%1 \n
-mkdir .\camera_front \n
-ffmpeg -y -i %name% ^ \n
--vf "v360=input=e:output=e:h_fov=90:v_fov=90:yaw=-90:pitch=0"  -s 1920x1920 -r 5 .\camera_front\%%06d.jpg \n
-\n
-You need to download ffmpeg and put it in the same folder as the batch script:
+  
+set name=%1  
+mkdir .\camera_front  
+ffmpeg -y -i %name% ^  
+-vf "v360=input=e:output=e:h_fov=90:v_fov=90:yaw=-90:pitch=0"  -s 1920x1920 -r 5 .\camera_front\%%06d.jpg  
+  
+You need to download ffmpeg and put it in the same folder as the batch script:  
 https://www.ffmpeg.org/download.html
 
 To sync the images, I use the default timer application on my Android phone.  With the timer running (with hundreds of seconds showing), 
