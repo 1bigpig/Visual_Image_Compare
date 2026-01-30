@@ -3,7 +3,7 @@ Allows user to visually synchronize images between an Eagle Lidar scanner and an
 
 ![screenshot of the application](VisiaulImageCompare.png)
 
-![How I mounted my camera](Screenshot_20260130_181314_Gallery.jpg)
+![How I mounted my camera](Screenshot_20260130_181314_Gallery.png)
 
   
 How to use:  
