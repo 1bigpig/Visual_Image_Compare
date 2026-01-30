@@ -18,12 +18,12 @@ Work flow:
 
 For DJI/Insta360 camera, export the video files as a panoramic MP4 video file.  I then use ffmpeg to extract the images from
 the mp4 file.  You do need to use the same "frame rate" as the Eagle camera. I use this batch script to do the extraction:
-
-set name=%1
-mkdir .\camera_front
-ffmpeg -y -i %name% ^
--vf "v360=input=e:output=e:h_fov=90:v_fov=90:yaw=-90:pitch=0"  -s 1920x1920 -r 5 .\camera_front\%%06d.jpg
-
+\n
+set name=%1 \n
+mkdir .\camera_front \n
+ffmpeg -y -i %name% ^ \n
+-vf "v360=input=e:output=e:h_fov=90:v_fov=90:yaw=-90:pitch=0"  -s 1920x1920 -r 5 .\camera_front\%%06d.jpg \n
+\n
 You need to download ffmpeg and put it in the same folder as the batch script:
 https://www.ffmpeg.org/download.html
 
