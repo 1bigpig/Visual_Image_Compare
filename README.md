@@ -4,7 +4,7 @@ Allows user to visually synchronize images between an Eagle Lidar scanner and an
 ![screenshot of the application](VisiaulImageCompare.png)
 
 How to use:  
-[coming soon]  
+[more info coming soon]  
 
 Select the Eagle Lidar image folder for the LEFT image.  Usually found in [your lidar folder]\shading\Colmap\images\.
 The RIGHT image folder will be the images extracted from your camera--360' or similar.
@@ -14,7 +14,7 @@ the files in the 360' camera image folder with the matching name from Eagle lida
 
 
 Work flow:  
-[coming soon]  
+[more info coming soon]  
 
 For DJI/Insta360 camera, export the video files as a panoramic MP4 video file.  I then use ffmpeg to extract the images from
 the mp4 file.  You do need to use the same "frame rate" as the Eagle camera. I use this batch script to do the extraction:
