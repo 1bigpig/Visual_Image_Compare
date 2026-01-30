@@ -33,3 +33,12 @@ https://www.ffmpeg.org/download.html
 To sync the images, I use the default timer application on my Android phone.  With the timer running (with hundreds of seconds showing), 
 the screen needs to be visible on both the Eagle camera and the 360' camera.  With both images with a few hundreds of a second of each other,
 the images should be close enough to match the trajectory of the original image to act as a replacment.
+
+
+NOTE:  
+[WARNING!]  
+  
+This is my first GUI python program.  It is still in developement and it has library requirements.  It does require the libraries:
+numpy  
+opencv    
+PIL (should be included in Python3 standard distribution)  
