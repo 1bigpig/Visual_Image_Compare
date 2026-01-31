@@ -41,6 +41,13 @@ ffmpeg -y -i %name% ^
 -vf "v360=input=e:output=e:h_fov=90:v_fov=90:yaw=0:pitch=0"    -s 1920x1920 -r 5 .\camera_right\%%06d.jpg ^  
 -vf "v360=input=e:output=e:h_fov=90:v_fov=90:yaw=-180:pitch=0" -s 1920x1920 -r 5 .\camera_left\%%06d.jpg  
   
+To use the script, open a windows terminal (command prompt) and type the name of the script plus the name of the .mp4 file you want to extract
+the images from.  ie:  
+
+extracter90.bat movie.mp4  
+  
+The script will create the image folder(s) and name them "camera_front" (and if you use the 3 image extractor script "camera_left" and "camera_right")
+in the same folder as script resides.  Each file will be sequencially named-- file name/order is very important for visual_image_compare.
   
 To sync the images, I use the default timer application on my Android phone.  With the timer running (with hundreds of seconds showing), 
 the screen needs to be visible on both the Eagle camera and the 360' camera.  With both images with a few hundreds of a second of each other,
